@@ -1,4 +1,4 @@
-import {routeConfig} from "@app/provider/router/ui/AppRouter";
+import routeConfig from "@app/provider/router/ui/AppRouter";
 
 export {
     routeConfig,

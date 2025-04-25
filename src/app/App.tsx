@@ -1,15 +1,17 @@
-import 'app/styles/index.scss'
-import AppRouter from "@app/provider/router/ui/AppRouter";
+import "@app/styles/index.scss";
+import MainPage from "@pages/MainPage/components/MainPage";
+import { YMaps } from "@pbe/react-yandex-maps";
 
 function App() {
-
   return (
     <>
-      <div className="app">
-        <AppRouter/>
-      </div>
+      <YMaps>
+        <div className="app">
+          <MainPage />
+        </div>
+      </YMaps>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
