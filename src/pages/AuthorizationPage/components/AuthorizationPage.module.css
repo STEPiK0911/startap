@@ -1,7 +1,8 @@
 .pageWrapper {
-  height: auto;
+  height: 91.2vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 100%;
+  justify-content: center;
 }

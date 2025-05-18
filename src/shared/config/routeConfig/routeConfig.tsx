@@ -1,6 +1,6 @@
 import { RouteProps } from "react-router-dom";
 import MainPage from "@pages/MainPage/components/MainPage";
-import {AuthPage} from "@pages/AuthPage";
+import {AuthorizationPage} from "@pages/AuthorizationPage";
 
 export enum AppRoutes {
   MAIN = "main",
@@ -19,7 +19,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   },
   [AppRoutes.AUTH]: {
     path: RoutePath.auth,
-    element: <AuthPage/>,
+    element: <AuthorizationPage/>,
   },
 
 };
