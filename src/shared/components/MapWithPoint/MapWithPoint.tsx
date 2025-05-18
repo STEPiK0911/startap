@@ -1,20 +1,16 @@
-import React from "react";
-import { YMap } from "../Map/Map";
-import Block from "../Block/Block";
+import Block from "@shared/components/Block/Block";
+import YMap from "@shared/components/Map/Map";
 
-const MapWithPoint = () => {
-  return (
-    <div
-      style={{
-        height: 550,
-        marginTop: 60,
-        display: "flex",
-      }}
-    >
-      <Block />
-      <YMap />
-    </div>
-  );
+interface MapWithPointProps {
+    isFull: boolean;
+}
+
+const MapWithPoint = ({ isFull }: MapWithPointProps) => {
+    return (
+        <div style={{ height: 550, marginTop: 60, display: "flex", gap: 50 }}>
+            <Block />
+            <YMap expanded={isFull} />
+        </div>
+    );
 };
-
 export default MapWithPoint;

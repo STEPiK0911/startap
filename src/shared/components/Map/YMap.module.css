@@ -1,0 +1,31 @@
+/* YMap.module.css */
+
+.mapContainer {
+    position: relative;
+    width: 600px;          /* такой же как у Block */
+    height: 500px;         /* тоже одинаково */
+    transition: transform 0.5s ease;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* when “collapsed” (small) we don’t need to change width/height or position */
+.collapsed {
+    opacity: 1;            /* or 0.5 if you actually want it semi-transparent */
+}
+
+/* when “expanded” we absolutely position it full-screen */
+.expanded {
+    position: absolute;
+    top: 230px;                /* ниже инпута */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;               /* шире */
+    height: 75vh;              /* выше */
+    background: white;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    pointer-events: auto;
+}
+

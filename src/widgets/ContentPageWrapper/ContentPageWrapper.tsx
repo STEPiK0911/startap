@@ -1,18 +1,42 @@
-import InviteGraphics from "@shared/components/InviteGraphics/InviteGraphics";
+import React, { useRef, useState, useEffect } from "react";
 import MapWithPoint from "@shared/components/MapWithPoint/MapWithPoint";
-import SaleGraphics from "@shared/components/SaleGraphics/SaleGraphics";
 import Search from "@shared/components/Search/Search";
-import React from "react";
+import SaleGraphics from "@shared/components/SaleGraphics/SaleGraphics";
+import InviteGraphics from "@shared/components/InviteGraphics/InviteGraphics";
 
 const ContentPageWrapper = () => {
-  return (
-    <div>
-      <Search />
-      <MapWithPoint />
-      <SaleGraphics />
-      <InviteGraphics />
-    </div>
-  );
+    const [isMapFull, setIsMapFull] = useState(false);
+    const [isMouseOverMap, setIsMouseOverMap] = useState(false);
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+    useEffect(() => {
+        if (!isSearchFocused && !isMouseOverMap) {
+            const timeout = setTimeout(() => setIsMapFull(false), 300);
+            return () => clearTimeout(timeout);
+        }
+    }, [isSearchFocused, isMouseOverMap]);
+
+    return (
+        <div>
+            <Search
+                onFocus={() => {
+                    setIsSearchFocused(true);
+                    setIsMapFull(true);
+                }}
+                onBlur={() => setIsSearchFocused(false)}
+            />
+
+            <div
+                onMouseEnter={() => setIsMouseOverMap(true)}
+                onMouseLeave={() => setIsMouseOverMap(false)}
+            >
+                <MapWithPoint isFull={isMapFull} />
+            </div>
+
+            <SaleGraphics />
+            <InviteGraphics />
+        </div>
+    );
 };
 
 export default ContentPageWrapper;

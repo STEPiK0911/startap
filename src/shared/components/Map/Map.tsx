@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Map } from "@pbe/react-yandex-maps";
-export const YMap = () => {
-  return (
-    <div style={{ width: 100, height: 200, marginLeft: 50 }}>
-      <Map
-        defaultState={{ center: [55.75, 37.57], zoom: 9 }}
-        height={500}
-        width={600}
-      />
-    </div>
-  );
+import styles from "./YMap.module.css";
+
+const YMap = ({ expanded }: { expanded: boolean }) => {
+    const mapRef = useRef<any>(null);
+
+    useEffect(() => {
+        if (expanded && mapRef.current) {
+            // Принудительно обновляем размер карты
+            setTimeout(() => {
+                mapRef.current.container.fitToViewport();
+            }, 300); // дождаться завершения transition
+        }
+    }, [expanded]);
+
+    return (
+        <div className={`
+    ${styles.mapContainer}
+    ${expanded ? styles.expanded : styles.collapsed}
+  `}>
+            <Map
+                defaultState={{ center: [55.75, 37.57], zoom: 9 }}
+                instanceRef={mapRef}
+                width="100%"
+                height="100%"
+            />
+        </div>
+    );
 };
 
-export default Map;
+export default YMap;

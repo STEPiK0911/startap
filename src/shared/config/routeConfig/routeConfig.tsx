@@ -1,12 +1,15 @@
 import { RouteProps } from "react-router-dom";
 import MainPage from "@pages/MainPage/components/MainPage";
+import {AuthPage} from "@pages/AuthPage";
 
 export enum AppRoutes {
   MAIN = "main",
+  AUTH = "auth",
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: "/",
+  [AppRoutes.AUTH]: "/auth",
 };
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -14,4 +17,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     path: RoutePath.main,
     element: <MainPage />,
   },
+  [AppRoutes.AUTH]: {
+    path: RoutePath.auth,
+    element: <AuthPage/>,
+  },
+
 };
