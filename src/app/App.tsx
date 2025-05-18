@@ -1,5 +1,4 @@
 import "@app/styles/index.scss";
-import MainPage from "@pages/MainPage/components/MainPage";
 import { YMaps } from "@pbe/react-yandex-maps";
 import AppRouter from "@app/provider/router/ui/AppRouter";
 import NavBar from "@shared/components/NavBar/NavBar";
@@ -9,8 +8,8 @@ function App() {
     <>
       <YMaps>
         <div className="app">
-            <NavBar />
-          <AppRouter/>
+          <NavBar />
+          <AppRouter />
         </div>
       </YMaps>
     </>
