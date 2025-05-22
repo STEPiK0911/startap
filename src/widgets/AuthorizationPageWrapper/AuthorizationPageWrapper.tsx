@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import style from "./AuthorizationPageWrapper.module.css"
 import Cookies from "js-cookie";
 
 type User = {
@@ -76,7 +77,7 @@ const AuthorizationPageWrapper = () => {
     );
   }
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div className={style.AuthorizationPageWrapper}>
       <h2>{isLogin ? "Вход" : "Регистрация"}</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -106,11 +107,18 @@ const AuthorizationPageWrapper = () => {
           {isLogin ? "Войти" : "Зарегистрироваться"}
         </button>
       </form>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin
-          ? "Нет аккаунта? Зарегистрироваться"
-          : "Уже есть аккаунт? Войти"}
-      </button>
+      {isLogin ? (
+          <p>
+            Нет аккаунта?{" "}
+            <button onClick={() => setIsLogin(false)}>Зарегистрироваться</button>
+          </p>
+      ) : (
+          <p>
+            Уже есть аккаунт?{" "}
+            <button onClick={() => setIsLogin(true)}>Войти</button>
+          </p>
+      )}
+
 
       <div style={{ marginTop: "20px", color: "gray" }}>
         <p>Для теста используйте:</p>
