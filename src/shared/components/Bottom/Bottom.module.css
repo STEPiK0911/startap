@@ -1,0 +1,22 @@
+.navBar {
+  width: 100%;
+  padding-top: 0px;
+  display: flex;
+  justify-content: space-between;
+  height: 200px;
+  padding-top: 35px;
+  align-items: flex-start;
+  background-color: white;
+}
+
+.navigations {
+  display: flex;
+  flex-direction: column;
+  margin-right: 25px;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.logo {
+  margin-left: 25px;
+}
