@@ -51,12 +51,12 @@ const InviteGraphics = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "row", marginTop: 60 }}>
+    <div style={{ display: "flex", flexDirection: "row",}}>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
           style={{
-            width: 750,
-            height: 300,
+            width: 724,
+            height: 275,
             backgroundColor: "white",
             display: "flex",
             alignItems: "center",

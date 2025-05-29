@@ -3,6 +3,7 @@ import MapWithPoint from "@shared/components/MapWithPoint/MapWithPoint";
 import Search from "@shared/components/Search/Search";
 import SaleGraphics from "@shared/components/SaleGraphics/SaleGraphics";
 import InviteGraphics from "@shared/components/InviteGraphics/InviteGraphics";
+import style from './Page.module.css'
 
 const ContentPageWrapper = () => {
   const [isMapFull, setIsMapFull] = useState(false);
@@ -32,9 +33,10 @@ const ContentPageWrapper = () => {
       >
         <MapWithPoint isFull={isMapFull} />
       </div>
-
+        <div className={style.dive}>
       <SaleGraphics />
       <InviteGraphics />
+        </div>
     </>
   );
 };

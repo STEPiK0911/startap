@@ -1,0 +1,7 @@
+.dive {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    width: 100%;
+    gap: 50px;
+}

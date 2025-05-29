@@ -80,7 +80,7 @@ const SaleGraphics = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <div style={{ width: 350, backgroundColor: "white", padding: 10 }}>
+      <div style={{ width: 365, backgroundColor: "white", padding: 10 }}>
         <h4 style={{ textAlign: "center" }}>Воронка продаж</h4>
         {funnelData.map((item, idx) => (
           <FunnelSegment
