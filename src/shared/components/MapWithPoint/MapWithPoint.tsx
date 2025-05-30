@@ -3,14 +3,18 @@ import YMap from "@shared/components/Map/Map";
 
 interface MapWithPointProps {
     isFull: boolean;
+    onSelectPoint: (id: string) => void;
+    selectedPointId: string; // 👈 добавили
 }
 
-const MapWithPoint = ({ isFull }: MapWithPointProps) => {
+const MapWithPoint = ({ isFull, onSelectPoint, selectedPointId }: MapWithPointProps) => {
     return (
         <div style={{ height: 550, marginTop: 60, display: "flex", gap: 50 }}>
-            <Block />
-            <YMap expanded={isFull} />
+            <Block pointId={selectedPointId} /> {/* ✅ теперь работает */}
+
+            <YMap expanded={isFull} onPointClick={onSelectPoint} />
         </div>
     );
 };
+
 export default MapWithPoint;

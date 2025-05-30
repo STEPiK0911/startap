@@ -3,40 +3,11 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './YMap.module.css';
+import {points} from "@shared/components/Block/points";
+
 
 // Точки с координатами, названиями и адресами
-const points = [
-    {
-        id: 'kremlin',
-        coords: [55.752023, 37.617499],
-        title: 'Московский Кремль',
-        address: 'Красная площадь, Москва',
-    },
-    {
-        id: 'vdnh',
-        coords: [55.829998, 37.633305],
-        title: 'ВДНХ',
-        address: 'Проспект Мира, 119, Москва',
-    },
-    {
-        id: 'msu',
-        coords: [55.703118, 37.530887],
-        title: 'МГУ им. Ломоносова',
-        address: 'Ленинские Горы, 1, Москва',
-    },
-    {
-        id: 'ostankino',
-        coords: [55.819543, 37.611619],
-        title: 'Останкинская башня',
-        address: 'ул. Академика Королёва, 15, Москва',
-    },
-    {
-        id: 'zaryadye',
-        coords: [55.751739, 37.630802],
-        title: 'Парк Зарядье',
-        address: 'ул. Варварка, 6, стр. 1, Москва',
-    },
-];
+
 
 // Кастомная иконка
 const svgIcon = new L.DivIcon({
@@ -90,12 +61,31 @@ const YMap = ({
                             click: () => onPointClick?.(point.id),
                         }}
                     >
-                        <Popup>
-                            <div>
+                        <Popup minWidth={250}>
+                            <div style={{ fontFamily: "sans-serif" }}>
+                                <img
+                                    src={point.image}
+                                    alt={point.title}
+                                    style={{
+                                        width: "100%",
+                                        height: 120,
+                                        objectFit: "cover",
+                                        borderRadius: 8,
+                                        marginBottom: 8,
+                                    }}
+                                />
                                 <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{point.title}</div>
-                                <div style={{ fontSize: '14px', color: '#555' }}>{point.address}</div>
+                                <div style={{ fontSize: '14px', color: '#555', marginBottom: 6 }}>{point.address}</div>
+                                <div style={{ fontSize: '14px', marginBottom: 4 }}>
+                                    <strong>Тип:</strong> {point.type}
+                                </div>
+                                <div style={{ fontSize: '14px', marginBottom: 4 }}>
+                                    <strong>Рейтинг:</strong> {point.rating} ⭐
+                                </div>
+                                <div style={{ fontSize: '13px', color: '#444' }}>{point.description}</div>
                             </div>
                         </Popup>
+
                     </Marker>
                 ))}
             </MapContainer>

@@ -1,62 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import Papa from "papaparse";
+import { points } from "./points";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useFavorites } from "../../../pages/FavoritesPage/components/FavoritesContext";
 
-const Block = () => {
-  const [pieData, setPieData] = useState([]);
-  const [ageData, setAgeData] = useState([]);
+const Block = ({ pointId }: { pointId: string }) => {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [rating, setRating] = useState<number | null>(null);
 
-  useEffect(() => {
-    Papa.parse("/face_stats.csv", {
-      download: true,
-      header: true,
-      complete: (result) => {
-        const rows = result.data.filter(
-          (row) => row.age && row.gender && row.emotion
-        );
+    const { favorites, toggleFavorite } = useFavorites();
 
-        // Для PieChart по эмоциям
-        const emotionCounts = rows.reduce((acc, row) => {
-          const emotion = row.emotion;
-          acc[emotion] = (acc[emotion] || 0) + 1;
-          return acc;
-        }, {} as Record<string, number>);
+    useEffect(() => {
+        const point = points.find((p) => p.id === pointId);
+        if (point) {
+            setTitle(point.title);
+            setDescription(point.description || "");
+            setRating(point.rating || null);
+        }
+    }, [pointId]);
 
-        const pie = Object.entries(emotionCounts).map(([key, value]) => ({
-          name: key,
-          value,
-        }));
+    const isFavorite = favorites.some((p) => p.id === pointId);
 
-        setPieData(pie);
+    return (
+        <div style={{ height: 500, width: 500, backgroundColor: "white", padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+                <div style={{ fontWeight: "bold", fontSize: 18 }}>{title}</div>
+                {rating !== null && (
+                    <div style={{ fontSize: 16, color: "#444" }}>
+                        ⭐ {rating}
+                    </div>
+                )}
+            </div>
 
-        // Для AreaChart по возрасту
-        const ages = rows.map((row) => ({
-          name: row.timestamp.split("T")[1].slice(0, 8),
-          age: parseInt(row.age, 10),
-        }));
+            <div style={{ flexGrow: 1, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+                <div style={{ fontSize: 15, color: "#555", maxWidth: "90%" }}>
+                    {description}
+                </div>
+            </div>
 
-        setAgeData(ages);
-      },
-    });
-  }, []);
-  return (
-    <div style={{ height: 500, width: 500, backgroundColor: "white" }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            dataKey="value"
-            isAnimationActive={false}
-            data={pieData}
-            cx="50%"
-            cy="50%"
-            fill="#8884d8"
-            label
-          />
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
-  );
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+                <button onClick={() => toggleFavorite(pointId)} style={{ background: "none", border: "none", cursor: "pointer" }}>
+                    {isFavorite ? (
+                        <AiFillHeart size={64} color="red" />
+                    ) : (
+                        <AiOutlineHeart size={64} color="#999" />
+                    )}
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default Block;

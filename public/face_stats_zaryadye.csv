@@ -1,0 +1,7 @@
+timestamp,age,gender,emotion
+2025-05-30T01:16:53.820379,28,"{'Woman': np.float32(0.36158812), 'Man': np.float32(99.63841)}",happy
+2025-05-30T01:16:59.239257,31,"{'Woman': np.float32(5.50006), 'Man': np.float32(94.49993)}",neutral
+2025-05-30T01:17:04.595500,27,"{'Woman': np.float32(0.041070774), 'Man': np.float32(99.95892)}",fear
+2025-05-30T01:17:09.611026,24,"{'Woman': np.float32(0.18364699), 'Man': np.float32(99.81635)}",happy
+2025-05-30T01:17:14.724205,29,"{'Woman': np.float32(12.063204), 'Man': np.float32(87.93679)}",neutral
+2025-05-30T01:17:21.947463,33,"{'Woman': np.float32(7.1104326), 'Man': np.float32(92.88957)}",fear

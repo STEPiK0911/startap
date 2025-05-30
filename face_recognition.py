@@ -8,6 +8,7 @@ import numpy as np
 import os
 from scipy.spatial.distance import cosine
 
+# Создание папки для CSV, если её нет
 os.makedirs("public", exist_ok=True)
 
 MIN_INTERVAL_SEC = 5
@@ -23,11 +24,20 @@ last_analysis_time = 0
 recent_embeddings = []
 results = []
 
-last_analysis = None  # age, gender, emotion
-last_box = None       # (x, y, w, h)
+last_analysis = None
+last_box = None
 
 def is_similar_embedding(e1, e2, threshold=SIMILARITY_THRESHOLD):
     return cosine(e1, e2) < threshold
+
+def get_next_csv_path(base_name="face_stats", folder="public"):
+    i = 1
+    while True:
+        filename = f"{base_name}_{i}.csv"
+        path = os.path.join(folder, filename)
+        if not os.path.exists(path):
+            return path
+        i += 1
 
 while True:
     ret, frame = video_capture.read()
@@ -101,8 +111,13 @@ video_capture.release()
 cv2.destroyAllWindows()
 executor.shutdown()
 
-with open("public/face_stats.csv", "w", newline="") as csvfile:
+# Сохранение результатов в новый файл
+csv_path = get_next_csv_path()
+
+with open(csv_path, "w", newline="") as csvfile:
     fieldnames = ["timestamp", "age", "gender", "emotion"]
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(results)
+
+print(f"Результаты сохранены в файл: {csv_path}")
